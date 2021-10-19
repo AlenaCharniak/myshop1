@@ -1,0 +1,29 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+    {% if category %}{{ category.title }}{% else %}Products{% endif %}
+{% endblock %}
+{% block content %}
+
+<div class="row">
+ <div class="col-lg-4 col-md-6 mb-4">
+     <div class="card h-100">
+         <img class="card-img-top" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+         <div class="card-body">
+         <h4 class="card-title">
+             <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+             <p class="price">{{ product.price }} Br</p>
+         </h4>
+         <form action="{% url "cart:cart_add" product.id %}" method="post">
+             {{ cart_product_form }}
+             {% csrf_token %}
+             <input type="submit" value="Add to cart">
+         </form>
+
+
+         </div>
+     {{ product.description|linebreaks }}
+    </div>
+ </div>
+</div>
+{% endblock %}
