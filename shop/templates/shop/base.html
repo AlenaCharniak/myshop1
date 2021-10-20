@@ -32,10 +32,8 @@
                                 {% if cart|length > 0 %}
                                     Your cart:
                                     <a href="{% url "cart:cart_detail" %}">
-                                    <span class="badge bg-dark text-white ms-1 rounded-pill">
                                         {{ total_items }} item{{ total_items|pluralize }},
-                                        {{ cart.get_total_price }} Br
-                                    </span>
+                                        ${{ cart.get_total_price }}
                                     </a>
                                 {% else %}
                                     Your cart is empty.
