@@ -8,8 +8,8 @@
     <table class="cart">
         <thead>
         <tr>
-            <th>Image</th>
-            <th>Product</th>
+            <th></th>
+            <th >Product</th>
             <th>Quantity</th>
             <th>Remove</th>
             <th>Unit price</th>
@@ -22,32 +22,34 @@
                 <tr>
                     <td>
                         <a href="{{ product.get_absolute_url }}">
-                            <img src="
-                                {% if product.image %}
+                            <img class="col-md-6" class="card-img-top mb-5 mb-md-0" src=
+                                    "{% if product.image %}
                                     {{ product.image.url }}
                                 {% else %}
                                     {% static "img/no_image.png" %}
                                 {% endif %}">
                         </a>
                     </td>
-                    <td>{{ product.name }}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td><a href="{% url "cart:cart_remove" product.id%}">Remove</a></td>
-                    <td class="num">{{ item.price }} Br</td>
-                    <td class="num">{{ item.total_price }} Br</td>
+                  <div class="col-md-6">
+                    <td  width="300">{{ product.name }}</td>
+                    <td width="100">{{ item.quantity }}</td>
+                    <td width="150"><a class="btn btn-outline-dark flex-shrink-0" href="{% url "cart:cart_remove" product.id%}">Remove</a></td>
+                    <td width="150" class="price">{{ item.price }} Br</td>
+                    <td  width="150" class="price">{{ item.total_price }} Br</td>
+                  </div>
                 </tr>
             {% endwith %}
         {% endfor %}
         <tr class="total">
             <td>Total</td>
             <td colspan="4"></td>
-            <td class="num">${{ cart.get_total_price }}</td>
+            <td class="num">{{ cart.get_total_price }} Br</td>
         </tr>
         </tbody>
     </table>
     <p class="text-right">
-        <a href="{% url "shop:product_list" %}" class="button light">Continue shopping</a>
-        <a href="{% url "orders:order_create" %}" class="button">
+        <a href="{% url "shop:product_list" %}" class="btn btn-outline-dark flex-shrink-0">Continue shopping</a>
+        <a href="{% url "orders:order_create" %}" class="btn btn-outline-dark flex-shrink-0">
     Checkout
 </a>
     </p>

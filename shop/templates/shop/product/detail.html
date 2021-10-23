@@ -5,25 +5,30 @@
 {% endblock %}
 {% block content %}
 
-<div class="row">
- <div class="col-lg-4 col-md-6 mb-4">
-     <div class="card h-100">
-         <img class="card-img-top" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+<section class="py-5">
+ <div class="container px-4 px-lg-5 my-5">
+     <div class="row gx-4 gx-lg-5 align-items-center">
+         <div class="col-md-6">
+         <img class="card-img-top" class="card-img-top mb-5 mb-md-0"
+              src="{% if product.image %}{{ product.image.url }}
+                   {% else %}{% static "img/no_image.png" %}{% endif %}">
+         </div>
+         <div class="col-md-6">
          <div class="card-body">
          <h4 class="card-title">
              <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
              <p class="price">{{ product.price }} Br</p>
          </h4>
+
          <form action="{% url "cart:cart_add" product.id %}" method="post">
              {{ cart_product_form }}
              {% csrf_token %}
-             <input type="submit" value="Add to cart">
+             <input class="btn btn-outline-dark flex-shrink-0" type="submit" value="Add to cart">
          </form>
-
-
+            <p class="lead">{{ product.description|linebreaks }}</p>
+          </div>
          </div>
-     {{ product.description|linebreaks }}
     </div>
  </div>
-</div>
+</section>
 {% endblock %}
